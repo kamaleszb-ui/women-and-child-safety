@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart SafeRide - Guardian System</title>
+    <meta name="description" content="AI-powered safety layer for ride-sharing with real-time tracking, SOS, and AI risk detection.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="ambient-background">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="glass-panel navbar">
+            <div class="logo">
+                <div class="logo-icon pulse-soft">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <span>SafeRide</span>
+            </div>
+            
+            <div class="nav-center">
+                <div class="status-indicator">
+                    <span class="status-dot connected"></span>
+                    <span class="status-text">Live Guardian Active</span>
+                </div>
+            </div>
+
+            <div class="nav-actions">
+                <div class="recording-badge" id="recording-badge">
+                    <span class="recording-dot"></span> REC
+                </div>
+                <div class="user-profile">
+                    <img src="https://i.pravatar.cc/150?img=47" alt="User Profile">
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Dashboard -->
+        <main class="dashboard">
+            <!-- Left Area: Map and Tracking -->
+            <section class="map-section">
+                <div class="glass-panel map-container">
+                    <div class="map-header">
+                        <h2>Real-Time Tracking</h2>
+                        <div class="risk-badge risk-low" id="risk-banner">
+                            <i class="fa-solid fa-brain"></i>
+                            <span>AI Risk: <strong id="risk-level-text">LOW</strong></span>
+                        </div>
+                    </div>
+                    
+                    <div class="map-interface">
+                        <!-- Simulated Map Grid -->
+                        <div class="grid-overlay"></div>
+                        
+                        <!-- Route Line -->
+                        <svg class="route-svg" viewBox="0 0 400 300">
+                            <path class="route-path" d="M 50 250 Q 150 200, 200 150 T 350 50" fill="none" stroke="rgba(0, 240, 255, 0.4)" stroke-width="4" stroke-dasharray="8,8" />
+                            <path class="route-progress" d="M 50 250 Q 150 200, 200 150" fill="none" stroke="#00f0ff" stroke-width="4" />
+                        </svg>
+
+                        <!-- Vehicle Marker -->
+                        <div class="vehicle-marker" id="vehicle-marker">
+                            <div class="vehicle-ring"></div>
+                            <i class="fa-solid fa-car-side"></i>
+                        </div>
+
+                        <!-- Deviation Warning Zone (Hidden by default) -->
+                        <div class="deviation-zone" id="deviation-zone"></div>
+                    </div>
+
+                    <div class="trip-details">
+                        <div class="detail-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div>
+                                <span class="detail-label">Next Stop</span>
+                                <span class="detail-value">Main St. Avenue</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fa-solid fa-stopwatch"></i>
+                            <div>
+                                <span class="detail-label">Est. Arrival</span>
+                                <span class="detail-value">8 mins</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Area: Controls and Safety Features -->
+            <section class="controls-section">
+                <!-- SOS Panel -->
+                <div class="glass-panel sos-panel">
+                    <div class="panel-header">
+                        <h3><i class="fa-solid fa-microphone-lines"></i> Hands-Free SOS</h3>
+                        <span class="listening-status">Listening...</span>
+                    </div>
+                    <div class="sos-content">
+                        <button class="sos-btn" id="sos-btn" title="Click to trigger manually">
+                            <div class="ripple-container">
+                                <div class="ripple"></div>
+                                <div class="ripple"></div>
+                            </div>
+                            <i class="fa-solid fa-tower-broadcast"></i>
+                            <span class="sos-text">Say "HELP"</span>
+                        </button>
+                        <p class="sos-desc">Triggers live broadcast, alerts authorities, and starts covert recording.</p>
+                    </div>
+                </div>
+
+                <!-- Driver Trust Score Panel -->
+                <div class="glass-panel driver-panel">
+                    <div class="driver-info">
+                        <div class="driver-avatar">
+                            <img src="https://i.pravatar.cc/150?img=11" alt="Driver">
+                            <div class="verified-badge"><i class="fa-solid fa-check"></i></div>
+                        </div>
+                        <div class="driver-meta">
+                            <h3>Michael T.</h3>
+                            <div class="plate-number">XYZ-9876</div>
+                        </div>
+                        <div class="qr-action" id="qr-verify-btn">
+                            <i class="fa-solid fa-qrcode"></i>
+                            <span>Scan</span>
+                        </div>
+                    </div>
+                    
+                    <div class="trust-score-container">
+                        <div class="score-header">
+                            <span>Trust Score</span>
+                            <span class="score-value">98/100</span>
+                        </div>
+                        <div class="score-bar">
+                            <div class="score-fill"></div>
+                        </div>
+                        <div class="score-metrics">
+                            <div class="metric tooltip" data-tip="Zero safety complaints">
+                                <i class="fa-solid fa-user-shield"></i> Safe
+                            </div>
+                            <div class="metric tooltip" data-tip="99% Route Adherence">
+                                <i class="fa-solid fa-route"></i> Strict
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Child Safety Mode & Extras -->
+                <div class="glass-panel extras-panel">
+                    <div class="toggle-row">
+                        <div class="toggle-info">
+                            <i class="fa-solid fa-child-reaching child-icon"></i>
+                            <div>
+                                <h4>Child Safety Mode</h4>
+                                <p>Strict route enforcement</p>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="child-mode-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal-overlay" id="qr-modal">
+        <div class="glass-panel modal-content">
+            <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="scan-animation">
+                <i class="fa-solid fa-qrcode"></i>
+                <div class="scan-line"></div>
+            </div>
+            <h3>Verify Ride</h3>
+            <p>Ensure the vehicle plate matches <strong>XYZ-9876</strong>. The driver identity has been cryptographically secured.</p>
+            <button class="action-btn success-btn" id="confirm-ride-btn">Confirm Matching</button>
+        </div>
+    </div>
+    
+    <div class="sos-overlay" id="sos-modal">
+        <div class="sos-alert-box">
+            <i class="fa-solid fa-triangle-exclamation fa-beat-fade"></i>
+            <h2>EMERGENCY TRIGGERED</h2>
+            <p>Location shared with authorities.</p>
+            <p>Live audio/video recording started.</p>
+            <button class="action-btn cancel-btn" id="cancel-sos-btn">Cancel (PIN Req)</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
